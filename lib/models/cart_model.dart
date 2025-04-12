@@ -1,18 +1,14 @@
 import 'product_model.dart';
 
-class OrderModel {
+class CartModel {
   final String userId;
   final ProductModel product;
   final int count;
 
-  OrderModel({
-    required this.userId,
-    required this.product,
-    required this.count,
-  });
+  CartModel({required this.userId, required this.product, required this.count});
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
-    return OrderModel(
+  factory CartModel.fromJson(Map<String, dynamic> json) {
+    return CartModel(
       userId: json['userId'],
       product: ProductModel.fromJson(json['product']),
       count: json['count'],

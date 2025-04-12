@@ -1,123 +1,57 @@
-import 'package:e_commerce_app/models/user_model.dart';
-import 'package:e_commerce_app/service/user_server.dart';
 import 'package:e_commerce_app/views/home_screen/screen/home_screen.dart';
-import 'package:e_commerce_app/views/register_screen/screens/register_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+import '../../register_screen/screens/register_screen.dart';
+import '../widgets/text_field_widget.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
-  AppService appService = AppService();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-
-  String errorMessage = "";
-
-  List<UserModel> users = [];
-
-  @override
-  void initState() {
-    super.initState();
-    userLoding();
-  }
-
-  void userLoding() async {
-    users = await appService.getUsers();
-    setState(() {});
-  }
-
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 156, 185, 234),
-      appBar: AppBar(title: Text("Log in")),
-      body: Center(
+      backgroundColor: Colors.grey.shade500,
+      appBar: AppBar(
+        title: Text('Tizimga kirish'),
+        backgroundColor: Colors.grey.shade500,
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(left: 20, right: 20, top: 300),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 30,
           children: [
-            if (errorMessage != "")
-              Text(errorMessage, style: TextStyle(color: Colors.red)),
-            SizedBox(height: 10),
-
-            SizedBox(
-              width: 300,
-              child: TextField(
-                controller: email,
-                decoration: InputDecoration(
-                  label: Text("email"),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            SizedBox(
-              width: 300,
-              child: TextField(
-                controller: password,
-                obscureText: true,
-                decoration: InputDecoration(
-                  label: Text("password"),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                String inputEmail = email.text;
-                String inputPassword = password.text;
-
-                if (inputEmail == "" || inputPassword == "") {
-                  setState(() {
-                    errorMessage = "Email or password cannot be empty";
-                  });
-                } else {
-                  bool isRegistered = false;
-                  for (var user in users) {
-                    if (user.email == inputEmail &&
-                        user.password == inputPassword) {
-                      isRegistered = true;
-                      break;
-                    }
-                  }
-
-                  if (isRegistered) {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(builder: (context) => HomeScreen()),
-                    );
-                    setState(() {
-                      errorMessage = "";
-                    });
-                  } else {
-                    setState(() {
-                      errorMessage = "Wrong email or password";
-                    });
-                  }
-                }
-              },
-              child: Text("Log In"),
-            ),
-            SizedBox(height: 30),
-            Text("Don't have an account?"),
-            SizedBox(height: 5),
+            TextFieldWidget(hintText: 'Email kiriting'),
+            TextFieldWidget(hintText: 'Parol kiriting'),
             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  CupertinoPageRoute(builder: (context) => RegisterScreen()),
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
                 );
               },
-              child: Text("Register here"),
+              child: Text(
+                'Ro\'yxatdan o\'tish',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FilledButton(
+        style: FilledButton.styleFrom(backgroundColor: Colors.grey.shade600),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        },
+        child: Text('Kirish', style: TextStyle(color: Colors.black)),
       ),
     );
   }

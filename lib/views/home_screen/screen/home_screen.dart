@@ -39,28 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.builder(
         itemCount: 5,
         itemBuilder: (contex, index) {
-          return InkWell(
+          return ListTile(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProductScreen()),
               );
             },
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: ListTile(
-                tileColor: Colors.grey.shade600,
-                trailing: Image.network(
-                  'https://avatars.mds.yandex.net/i?id=ab74edcb3b42a90c68db898a6cf5bcfd61bf7590-5280579-images-thumbs&n=13',
-                ),
-                title: Text(
-                  'Olma',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            tileColor: Colors.grey.shade600,
+            trailing: Image.network(
+              'https://avatars.mds.yandex.net/i?id=ab74edcb3b42a90c68db898a6cf5bcfd61bf7590-5280579-images-thumbs&n=13',
+            ),
+            title: Text(
+              'Olma',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
           );

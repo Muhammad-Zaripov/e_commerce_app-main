@@ -1,34 +1,20 @@
+import 'package:e_commerce_app/models/user_model.dart';
+
 class ProductModel {
   final String image;
+  final String name;
   final int price;
-  final String title;
+  ProductModel({required this.image, required this.name, required this.price});
 
-  ProductModel({
-    required this.image,
-    required this.price,
-    required this.title,
-  });
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      image: json['image'],
+      name: json['name'],
+      price: json['price'],
+    );
+  }
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        image: json['image'],
-        price: json['price'],
-        title: json['title'],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'image': image,
-        'price': price,
-        'title': title,
-      };
-
-  ProductModel copyWith({
-    String? image,
-    int? price,
-    String? title,
-  }) =>
-      ProductModel(
-        image: image ?? this.image,
-        price: price ?? this.price,
-        title: title ?? this.title,
-      );
+  Map<String, dynamic> toJson() {
+    return {'image': image, 'name': name, 'price': price};
+  }
 }
