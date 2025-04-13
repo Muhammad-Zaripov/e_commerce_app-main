@@ -1,5 +1,3 @@
-import 'package:e_commerce_app/models/user_model.dart';
-
 class ProductModel {
   final String image;
   final String name;

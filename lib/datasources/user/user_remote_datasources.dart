@@ -11,7 +11,7 @@ class UserRemoteDatasource {
   }) async {
     try {
       final url = Uri.parse(
-        "https://salom-boyvachha-default-rtdb.asia-southeast1.firebasedatabase.app/market/users.json",
+        "https://e-commerce-b0752-default-rtdb.asia-southeast1.firebasedatabase.app/commerce/users.json",
       );
       final response = await http.get(url);
       final Map decodedData = jsonDecode(response.body);
